@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Disease Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+    max-width: 800px;
+    padding: 1.5rem 5%;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #333;
+    margin-top: 20px;
+    
+    margin-left: 300px;
+}
+
+        .card {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            color: #555;
+            text-align:center;
+        }
+        .card h1, .card h2 {
+            color: #007bff;
+        }
+        .card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .card li {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .card p {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .menu_icons  div{
+    color: white;
+    font-size: 2rem;
+    margin-left: 1.5rem;
+}
+header{
+        background-color: #6d11b4;
+        width: 100%;
+        padding: 1rem 3%;
+        z-index: 2000;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+}
+.logo {
+    align-items: left;
+    left: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 30px;
+    color: #c0c0c0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    margin-left: 2rem; /* Add margin to push the logo to the left */
+    position: relative;
+}
+.logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transform: scaleX(0);
+    animation: logoAnimation 2s infinite; /* Create a continuous animation */
+}
+@keyframes logoAnimation {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+}
+
+/* Hover effect for the logo */
+.logo:hover {
+    color: #f7f7f7;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    transform: translateX(10px);
+}
+
+
+
+
+nav a{
+   color: #dcdcdc; 
+    font-size: 1.7rem;
+    margin: 0 1.5rem;
+    text-decoration: none;
+    position: relative;
+}
+nav a:hover{
+    color: #a75f0d;
+    text-decoration: underline;
+}
+.menu_icons  div{
+    color: white;
+    font-size: 2rem;
+    margin-left: 1.5rem;
+}
+
+#menu-bar{
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">DocSage</div>
+        <nav class="navbar">
+            <a href="#" >home</a>
+            
+           
+           
+        </nav>
+    
+        <div class="menu_icons">
+            <div id="menu-bar" class="fa fa-bars"></div>
+            <div id="google_translate_element"></div>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                }
+            </script>
+            <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            
+    
+            
+    
+           
+        </div>
+    
+    </header>
+
+    
+    <div class="container">
+        <div class="card">
+            <h1>Predicted Disease:</h1>
+            <ul>
+                {% for disease in predicted_disease %}
+                    <li>{{ disease }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Precautions to be Taken:</h2>
+            <ul>
+                {% for precaution in precautions %}
+                    <li>{{ precaution }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card">
+            <h2>Occurrences of the Disease:</h2>
+            <p>{{ occurrences }}</p>
+        </div>
+        <div class="btn-container">
+            <a href="/nearby_hospitals" class="btn">Find Nearby Hospitals</a>
+        </div>
+    </div>
+</body>
+</html>

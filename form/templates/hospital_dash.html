@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins',sans-sseri;
+        }
+        body{
+            overflow-x: hidden;
+        }
+        .container{
+            position: relative;
+            width: 100%;
+        }
+        .sidebar{
+            position: fixed;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(45deg, #47cebe,#ef4a82);
+            overflow-x: hidden;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 2;
+        }
+        .sidebar ul li{
+            width: 100%;
+            list-style: none;
+
+        }
+        .sidebar ul li:hover{
+            background: #444;
+        }
+        .sidebar ul li:first-child{
+            line-height: 60px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 1px solid #fff;
+
+        }
+        .sidebar ul li:first-child:hover{
+            background: none;
+        }
+
+        .sidebar ul li a{
+            width: 100%;
+            text-decoration: none;
+            color: aliceblue;
+            height: 60px;
+            display: flex;
+            align-items: center;
+
+        }
+        .sidebar ul li a i{
+            min-width: 60px;
+            font-size: 24px;
+            text-align: center;
+        }
+        .sidebar .title{
+            padding: 0 10px;
+            font-size: 20px;
+        } 
+        .main{
+            position: absolute;
+            width: calc(100% - 300px);
+            min-height: 100vh;
+            left: 300px;
+            background: #f5f5f5;
+            display: flex; /* Add this */
+            justify-content: center; /* Add this */
+            align-items: center; /* Add this */
+
+        }
+        .user{
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+        .top-bar{
+            position: fixed;
+            height: 60px;
+            width: calc(100% - 300px);
+            background: #fff;
+            display: grid;
+            grid-template-columns: 10fr 0.4fr 1fr;
+            grid-gap: 5px;
+            align-items: center;
+            color: #444;
+            padding: 0 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+
+        }
+        .top-bar .search{
+            position: relative;
+            max-width: 400px;
+        }
+        .search input{
+            width: 100%;
+            min-width: 128px;
+            height: 40px;
+            padding: 0 40px;
+            font-size: 16px;
+            outline: none;
+            border: none;
+            background: #f5f5f5;
+
+
+        }
+        .search i{
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            cursor: pointer;
+        }
+
+        img{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+
+        }
+        .cards{
+            margin-top: 60px;
+            width: 100%;
+            padding: 35px 20px;
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-gap: 20px;
+        }
+        .cards .card{
+            background:linear-gradient(45deg,#47cebe,#ef4a82) ;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+        }
+        .number{
+            font-size: 35px;
+            font-family: 500;
+            color: #fff;
+        }
+        .card-name{
+            color: #444;
+            font-weight: 600;
+        }
+        .icon-box i{
+            font-size: 45px;
+            color: #444;
+        }
+        .tables{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-gap: 20px;
+            align-items: self-start;
+            padding: 0 20px 20px 20px;
+
+        }
+        .img-box-small{
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+
+        }
+        .last-appointment
+       {
+            min-height: 350px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+        }
+        .docter-visiting{
+            min-height: 350px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        .heading{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #444;
+        }
+        .btn{
+            padding: 5px 10px;
+            background: linear-gradient(45deg,#47cebe,#ef4a82);
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+
+        }
+        table{
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead td{
+            font-weight: 600;
+            color: #333;
+        }
+        table tr{
+            border-bottom:1px solid rgba(0, 0, 0, 0.1) ;
+        }
+        tbody tr:hover{
+            background: #444;
+            color: #fff;
+        }
+        table tbody tr:last-child{
+            border-bottom: none;
+        }
+        td{
+            padding:9px 5px ;
+        }
+        td i{
+            padding: 7px;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .profile-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px; /* Add this */
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            margin-left: 200px;
+        }
+
+        .profile-image img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 100%;
+            margin-left: 500px;
+        }
+
+        .profile-info {
+            text-align: center;
+            color: #444;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <ul>
+            <li>
+                <a href="#">
+                    <i class="fas fa-clinic-medical"></i>
+                    <div class="title">DR. Krishna Suratwala</div>
+                </a>
+            </li> 
+             
+            
+            <li>
+                <a href="#">
+                    <i class="fas fa-user-md"></i>
+                    <div class="title">Profile</div>
+                </a>
+            </li> 
+            <li>
+                <a href="#">
+                    <i class="fas fa-question"></i>
+                    <div class="title">Community</div>
+                </a>
+            </li> 
+
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="profile-card">
+        <div class="profile-image">
+            <img src="data:image/jpeg;base64,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" alt="Profile Image">
+        </div>
+        <div class="profile-info">
+            <p><strong>Doctor License Number:</strong> XYZ12345</p>
+            <p><strong>Doctor Name:</strong> Dr. Arohi </p>
+            <p><strong>Mobile Number:</strong> +1234567890</p>
+            <p><strong>Email:</strong> example@example.com</p>
+            <p><strong>Hospital Name:</strong> XYZ Hospital</p>
+            <p><strong>Speciality:</strong> Cardiology</p>
+            <!-- Add more fields as needed -->
+        </div>
+    </div>
+</div>
+        
+    
+</body>
+</html>

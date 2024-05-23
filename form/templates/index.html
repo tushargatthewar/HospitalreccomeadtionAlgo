@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column; /* Added to align elements vertically */
+        }
+
+        .container {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        header{
+            background-color: #6d11b4;
+            width: 100%;
+            padding: 1rem 3%;
+            z-index: 2000;
+            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: -20px;
+        }
+
+        .logo {
+            align-items: left;
+            left: 10px;
+            font-family: 'Arial', sans-serif;
+            font-size: 30px;
+            color: #c0c0c0;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            margin-left: 2rem; /* Add margin to push the logo to the left */
+            position: relative;
+        }
+
+/* Add subtle text shadow */
+.logo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transform: scaleX(0);
+    animation: logoAnimation 2s infinite; /* Create a continuous animation */
+}
+
+/* Keyframes for the logo animation */
+@keyframes logoAnimation {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+}
+
+/* Hover effect for the logo */
+.logo:hover {
+    color: #f7f7f7;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    transform: translateX(10px);
+}
+
+
+
+
+nav a{
+   color: #dcdcdc; 
+    font-size: 1.7rem;
+    margin: 0 1.5rem;
+    text-decoration: none;
+    position: relative;
+}
+nav a:hover{
+    color: #a75f0d;
+    text-decoration: underline;
+}
+.menu_icons  div{
+    color: white;
+    font-size: 2rem;
+    margin-left: 1.5rem;
+}
+
+#menu-bar{
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">DocSage</div>
+        <nav class="navbar">
+            
+            
+           
+           
+        </nav>
+    
+        <div class="menu_icons">
+            <div id="menu-bar" class="fa fa-bars"></div>
+            <div id="google_translate_element"></div>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                }
+            </script>
+            <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            <i class="fa-sharp fa-solid fa-user user_info" onclick="toggleMenu()"></i>
+    
+            
+    
+           
+        </div>
+    
+    </header>
+    <div class="container">
+    <h1>Disease Predictor - Save Your Life</h1>
+    <form action="/symptomes" method="post">
+        <label for="select1">Symptome 1:</label>
+        <select name="select1" id="select1">
+            <option value="select_symptom">Select suitable symptoms</option>
+            <option value="back_pain">back_pain</option>
+            <option value="abdominal_pain">abdominal_pain</option>
+            <option value="diarrhoea">diarrhoea</option>
+            <option value="mild_fever">mild_fever</option>
+            <option value="yellow_urine">yellow_urine</option>
+            <option value="yellowing_of_eyes">yellowing_of_eyes</option>
+            <option value="acute_liver_failure">acute_liver_failure</option>
+            <option value="fluid_overload">fluid_overload</option>
+            <option value="swelling_of_stomach">swelling_of_stomach</option>
+            <option value="swelled_lymph_nodes">swelled_lymph_nodes</option>
+            <option value="malaise">malaise</option>
+            <option value="blurred_and_distorted_vision">blurred_and_distorted_vision</option>
+            <option value="phlegm">phlegm</option>
+            <option value="throat_irritation">throat_irritation</option>
+            <option value="redness_of_eyes">redness_of_eyes</option>
+            <option value="sinus_pressure">sinus_pressure</option>
+            <option value="runny_nose">runny_nose</option>
+            <option value="congestion">congestion</option>
+            <option value="chest_pain">chest_pain</option>
+        </select><br>
+        <label for="select2">Symptome 2:</label>
+        <select name="select2" id="select2">
+            <option value="select_symptom">Select suitable symptoms</option>
+            <option value="back_pain">back_pain</option>
+            <option value="abdominal_pain">abdominal_pain</option>
+            <option value="diarrhoea">diarrhoea</option>
+            <option value="mild_fever">mild_fever</option>
+            <option value="yellow_urine">yellow_urine</option>
+            <option value="yellowing_of_eyes">yellowing_of_eyes</option>
+            <option value="acute_liver_failure">acute_liver_failure</option>
+            <option value="fluid_overload">fluid_overload</option>
+            <option value="swelling_of_stomach">swelling_of_stomach</option>
+            <option value="swelled_lymph_nodes">swelled_lymph_nodes</option>
+            <option value="malaise">malaise</option>
+            <option value="blurred_and_distorted_vision">blurred_and_distorted_vision</option>
+            <option value="phlegm">phlegm</option>
+            <option value="throat_irritation">throat_irritation</option>
+            <option value="redness_of_eyes">redness_of_eyes</option>
+            <option value="sinus_pressure">sinus_pressure</option>
+            <option value="runny_nose">runny_nose</option>
+            <option value="congestion">congestion</option>
+            <option value="chest_pain">chest_pain</option>
+        </select><br>
+        <label for="select3">Symptome 3:</label>
+        <select name="select3" id="select3">
+            <option value="select_symptom">Select suitable symptoms</option>
+            <option value="back_pain">back_pain</option>
+            <option value="abdominal_pain">abdominal_pain</option>
+            <option value="diarrhoea">diarrhoea</option>
+            <option value="mild_fever">mild_fever</option>
+            <option value="yellow_urine">yellow_urine</option>
+            <option value="yellowing_of_eyes">yellowing_of_eyes</option>
+            <option value="acute_liver_failure">acute_liver_failure</option>
+            <option value="fluid_overload">fluid_overload</option>
+            <option value="swelling_of_stomach">swelling_of_stomach</option>
+            <option value="swelled_lymph_nodes">swelled_lymph_nodes</option>
+            <option value="malaise">malaise</option>
+            <option value="blurred_and_distorted_vision">blurred_and_distorted_vision</option>
+            <option value="phlegm">phlegm</option>
+            <option value="throat_irritation">throat_irritation</option>
+            <option value="redness_of_eyes">redness_of_eyes</option>
+            <option value="sinus_pressure">sinus_pressure</option>
+            <option value="runny_nose">runny_nose</option>
+            <option value="congestion">congestion</option>
+            <option value="chest_pain">chest_pain</option>
+        </select><br>
+        <label for="select4">Symptome 4:</label>
+        <select name="select4" id="select4">
+            <option value="select_symptom">Select suitable symptoms</option>
+            <label for="select4">Symptome 4:</label>
+            <option value="back_pain">back_pain</option>
+            <option value="abdominal_pain">abdominal_pain</option>
+            <option value="diarrhoea">diarrhoea</option>
+            <option value="mild_fever">mild_fever</option>
+            <option value="yellow_urine">yellow_urine</option>
+            <option value="yellowing_of_eyes">yellowing_of_eyes</option>
+            <option value="acute_liver_failure">acute_liver_failure</option>
+            <option value="fluid_overload">fluid_overload</option>
+            <option value="swelling_of_stomach">swelling_of_stomach</option>
+            <option value="swelled_lymph_nodes">swelled_lymph_nodes</option>
+            <option value="malaise">malaise</option>
+            <option value="blurred_and_distorted_vision">blurred_and_distorted_vision</option>
+            <option value="phlegm">phlegm</option>
+            <option value="throat_irritation">throat_irritation</option>
+            <option value="redness_of_eyes">redness_of_eyes</option>
+            <option value="sinus_pressure">sinus_pressure</option>
+            <option value="runny_nose">runny_nose</option>
+            <option value="congestion">congestion</option>
+            <option value="chest_pain">chest_pain</option>
+        </select>
+        <button type="submit">Disease Predictor</button>
+    </form>
+
+    </div>
+</body>
+</html>

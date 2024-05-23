@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Hospitals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 80%;
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #map-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #map {
+            height: 400px;
+            width: 80%;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .place-photo {
+            width: 100px; /* Increased size for clearer view */
+            height: 100px; /* Increased size for clearer view */
+            margin-right: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body onload="initMap()">
+    <div class="container">
+        <h1>Nearby Hospitals</h1>
+        <form  id="search-form">
+            <label for="location">Enter Location:</label>
+            <input type="text" id="autocomplete" placeholder="Enter a location">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+
+        <table id="places"></table>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALqW1stUXtMZixCINS26qSogWgxDVQfcI&libraries=places&callback=initMap" async defer></script>
+    <script>
+        var map;
+        var service;
+        var autocomplete;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 19.182398757306437, lng: 77.3084681713642 },
+                zoom: 12
+            });
+
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'),
+                { types: ['geocode'] }
+            );
+
+            // Request geolocation permission when the page loads
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var initialLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    map.setCenter(initialLocation);
+
+                    // Fill input field with user's location
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({ 'location': initialLocation }, function(results, status) {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                document.getElementById('autocomplete').value = results[0].formatted_address;
+                            } else {
+                                console.log('No results found');
+                            }
+                        } else {
+                            console.log('Geocoder failed due to: ' + status);
+                        }
+                    });
+
+                    // Call function to search nearby hospitals
+                    searchNearbyHospitals();
+                }, function() {
+                    handleLocationError(true);
+                });
+            } else {
+                handleLocationError(false);
+            }
+
+            // Add event listener to the form submission
+            document.getElementById('search-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                var location = document.getElementById('autocomplete').value;
+                var geocoder = new google.maps.Geocoder();
+
+                // Geocode the entered location to get its coordinates
+                geocoder.geocode({ 'address': location }, function(results, status) {
+                    if (status === 'OK') {
+                        var userLocation = results[0].geometry.location;
+                        map.setCenter(userLocation);
+                        map.setZoom(15);
+
+                        // Call function to search nearby hospitals
+                        service = new google.maps.places.PlacesService(map);
+                        service.nearbySearch({
+                            location: userLocation,
+                            radius: '5000',
+                            type: ['hospital']
+                        }, callback);
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            });
+        }
+
+        function searchNearbyHospitals() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    map.setCenter(userLocation);
+                    map.setZoom(13);
+
+                    service = new google.maps.places.PlacesService(map);
+                    service.nearbySearch({
+                        location: userLocation,
+                        radius: '5000',
+                        type: ['hospital']
+                    }, callback);
+                }, function() {
+                    handleLocationError(true);
+                });
+            } else {
+                handleLocationError(false);
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation) {
+            alert(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+        }
+
+        var hospitalNames = [];
+
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                var table = document.getElementById("places");
+                table.innerHTML = '<tr><th>Name</th><th>Photo</th></tr>';
+            
+                var hospitalNames = [];
+
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                    addPlaceToList(results[i]);
+                    console.log(results[i].name);
+                    hospitalNames.push(results[i].name);
+                }
+                sendDataToBackend(hospitalNames);
+            }
+        }
+        function sendDataToBackend(data) {
+    // Convert the array to JSON
+    var jsonData = JSON.stringify(data);
+
+    // Create a new XMLHttpRequest object
+    var xhr = new XMLHttpRequest();
+
+    // Configure the request
+    xhr.open("POST", "/hospital_info", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    // Send the request with the data
+    xhr.send(jsonData);
+}
+
+        function createMarker(place) {
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                title: place.name
+            });
+
+            marker.addListener('click', function() {
+                var infoWindow = new google.maps.InfoWindow({
+                    content: '<strong>' + place.name + '</strong><br>' + place.vicinity
+                });
+                infoWindow.open(map, marker);
+            });
+        }
+
+        function addPlaceToList(place) {
+            var table = document.getElementById("places");
+            var row = table.insertRow();
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML = `<label>${place.name}</label>`;
+
+            if (place.photos && place.photos.length > 0) {
+                var cell2 = row.insertCell(1);
+                cell2.innerHTML = `<img class="place-photo" src="${place.photos[0].getUrl()}" alt="${place.name} Photo">`;
+            }
+        }
+    </script>
+</body>
+</html>

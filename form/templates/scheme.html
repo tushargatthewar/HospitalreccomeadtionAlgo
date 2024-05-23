@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Schemes</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Body styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    /* Header styles */
+    header {
+        background-color: #6d11b4;
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    /* Search bar styles */
+    .search-bar {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button {
+        background-color: #6d11b4;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #290544;
+    }
+
+    /* Main section styles */
+    main {
+        margin: 20px;
+    }
+
+    .schemes {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #6d11b4;
+        margin-bottom: 20px;
+    }
+
+    .scheme {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        transition: box-shadow 0.3s;
+    }
+
+    .scheme:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    h3 {
+        font-size: 20px;
+        color: #333;
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+        margin: 10px 0;
+    }
+
+    a {
+        background-color: #6d11b4;
+        color: #fff;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    a:hover {
+        background-color: #290544;
+    }
+
+    /* Additional styles for questions and eligibility message */
+    .question {
+        display: none;
+    }
+
+    #applyButton {
+        display: none;
+    }
+     /* Style the Google Translate element container */
+#google_translate_element {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the language dropdown button */
+.goog-te-gadget {
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Style the language dropdown list */
+.goog-te-menu-value {
+    font-size: 14px;
+}
+
+/* Style the language flags */
+.goog-te-menu-value img {
+    margin-right: 5px;
+}
+
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Government Schemes</h1>
+        
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+            }
+        </script>
+        <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </header>
+    
+    <main>
+        <section class="schemes">
+            <h2>Featured Schemes</h2>
+            <div class="scheme">
+                <h3>Mukhyamantri Amrutum Yojana Scheme</h3>
+                <p>The Government of Gujarat has launched the Mukhyamantri Amrutum (MA) Yojana to alleviate the financial strain on households, particularly those below the poverty line, caused by soaring healthcare costs. This scheme aims to provide access to quality medical and surgical care through a network of healthcare providers, offering essential support and reducing the risk of catastrophic health expenses for vulnerable families.<a href="https://www.myscheme.gov.in/schemes/ma">Learn More</a></p>
+                <a href="#" id="checkEligibility">Check Eligibility</a>
+                <div id="eligibilityQuestions">
+                    <div class="question">
+                        1) The annual income of the family is up to ₹4 Lakhs?
+                        <label><input type="radio" name="income" value="yes">Yes</label>
+                        <label><input type="radio" name="income" value="no">No</label>
+                    </div>
+                    <div class="question">
+                        2) Any member(s) who are Accredited Social Health Activist (ASHA) workers?
+                        <label><input type="radio" name="asha" value="yes">Yes</label>
+                        <label><input type="radio" name="asha" value="no">No</label>
+                    </div>
+                    <div class="question">
+                        3) Are you belong to BPL?
+                        <label><input type="radio" name="bpl" value="yes">Yes</label>
+                        <label><input type="radio" name="bpl" value="no">No</label>
+                    </div>
+                    <button id="submitEligibility"">check</button>
+                    <p id="eligibilityMessage"></p>
+                    <a href="https://digilocker.meripehchaan.gov.in/signin/oauth_partner/%252Foauth2%252F1%252Fconsent%253Flogo%253D1679484337_logo.png%2526acr%253Daadhaar%252Bmobile%2526response_type%253Dcode%2526client_id%253DJN4A657B18%2526state%253Dmyscheme%2526redirect_uri%253Dhttps%25253A%25252F%25252Fwww.myscheme.gov.in%25252Fapi%25252Fauth%25252Fdigilocker%25252Fcallback%2526code_challenge%253DMTk5YzQ4NmNkNjhiMmIyMTdiNjFjMzVhMTQxZjkyYjFjNDU0NjJiYjI3NWY1YmQ2OWQ3MmE0NGJkNzViMThlZg%2526code_challenge_method%253DS256%2526scope%253Dopenid%252Baddress%252Bpicture%2526orgid%253D018015%2526txn%253D654631d55b4cfoauth21699099093%2526hashkey%253D73dd72f6d68d830e913ec32f7b38dd605ff885a176402feea175224872a6c509%2526requst_pdf%253DY%2526app_name%253DbXlzY2hlbWU%25253D%2526signup%253Dsignup" id="applyButton">Apply</a>
+                 
+                </div>
+            </div>
+        </section>
+        <section class="schemes">
+            <h2>Featured Schemes</h2>
+            <div class="scheme">
+                <h3>Mamta Taruni Abhiyan</h3>
+                <p>The Mamta Taruni Abhiyan program in Gujarat offered free medical check-ups, iron and folic acid supplements, and deworming medication to adolescent girls aged 10 to 19 and pregnant women. It also aimed to raise awareness about menstrual hygiene, family planning, and nutrition. Implemented by health workers including ASHAs, ANMs, and Anganwadi workers, this initiative played a crucial role in enhancing maternal and child health in rural areas of Gujarat<a href="https://www.myscheme.gov.in/schemes/mta">Learn More</a></p>
+                <a href="#" id="checkEligibility">Check Eligibility</a>
+                <div id="eligibilityQuestions">
+                    <div class="question">
+                        1) Adolescent Girls?
+                        <label><input type="radio" name="income" value="yes">Yes</label>
+                        <label><input type="radio" name="income" value="no">No</label>
+                    </div>
+                    <div class="question">
+                        2) Are you in the age group of 10 to 19 years?
+                        <label><input type="radio" name="asha" value="yes">Yes</label>
+                        <label><input type="radio" name="asha" value="no">No</label>
+                    </div>
+                    <div class="question">
+                        3) Are you belong to BPL?
+                        <label><input type="radio" name="bpl" value="yes">Yes</label>
+                        <label><input type="radio" name="bpl" value="no">No</label>
+                    </div>
+                    <button id="submitEligibility"">check</button>
+                    <p id="eligibilityMessage"></p>
+                    <a href="https://digilocker.meripehchaan.gov.in/signin/oauth_partner/%252Foauth2%252F1%252Fconsent%253Flogo%253D1679484337_logo.png%2526acr%253Daadhaar%252Bmobile%2526response_type%253Dcode%2526client_id%253DJN4A657B18%2526state%253Dmyscheme%2526redirect_uri%253Dhttps%25253A%25252F%25252Fwww.myscheme.gov.in%25252Fapi%25252Fauth%25252Fdigilocker%25252Fcallback%2526code_challenge%253DMTk5YzQ4NmNkNjhiMmIyMTdiNjFjMzVhMTQxZjkyYjFjNDU0NjJiYjI3NWY1YmQ2OWQ3MmE0NGJkNzViMThlZg%2526code_challenge_method%253DS256%2526scope%253Dopenid%252Baddress%252Bpicture%2526orgid%253D018015%2526txn%253D654631d55b4cfoauth21699099093%2526hashkey%253D73dd72f6d68d830e913ec32f7b38dd605ff885a176402feea175224872a6c509%2526requst_pdf%253DY%2526app_name%253DbXlzY2hlbWU%25253D%2526signup%253Dsignup" id="applyButton">Apply</a>
+                 
+                </div>
+            </div>
+        </section>
+        <section class="schemes">
+            <h2>Featured Schemes</h2>
+            <div class="scheme">
+                <h3>Bal Sakha Yojana Scheme</h3>
+                <p>The Bal Sakha Yojana is a community-driven effort aimed at safeguarding the well-being of vulnerable children, managed by the Department of Women and Child Development in collaboration with NHM and the State Child Protection Society. Trained volunteers, or "Bal Sakhis," are deployed to identify and report cases of child abuse, neglect, and exploitation, while also extending support to families in need, with a focus on children aged 0-18 from disadvantaged backgrounds.<a href="https://www.myscheme.gov.in/schemes/bsy">Learn More</a></p>
+                <a href="#" id="checkEligibility">Check Eligibility</a>
+                <div id="eligibilityQuestions">
+                    <div class="question">
+                        1) Adolescent Girls?
+                        <label><input type="radio" name="income" value="yes">Yes</label>
+                        <label><input type="radio" name="income" value="no">No</label>
+                    </div>
+                    <div class="question">
+                        2) Are you in the age group of 10 to 19 years?
+                        <label><input type="radio" name="asha" value="yes">Yes</label>
+                        <label><input type="radio" name="asha" value="no">No</label>
+                    </div>
+                    <div class="question">
+                        3) Are you belong to BPL?
+                        <label><input type="radio" name="bpl" value="yes">Yes</label>
+                        <label><input type="radio" name="bpl" value="no">No</label>
+                    </div>
+                    <button id="submitEligibility"">check</button>
+                    <p id="eligibilityMessage"></p>
+                    <a href="https://digilocker.meripehchaan.gov.in/signin/oauth_partner/%252Foauth2%252F1%252Fconsent%253Flogo%253D1679484337_logo.png%2526acr%253Daadhaar%252Bmobile%2526response_type%253Dcode%2526client_id%253DJN4A657B18%2526state%253Dmyscheme%2526redirect_uri%253Dhttps%25253A%25252F%25252Fwww.myscheme.gov.in%25252Fapi%25252Fauth%25252Fdigilocker%25252Fcallback%2526code_challenge%253DMTk5YzQ4NmNkNjhiMmIyMTdiNjFjMzVhMTQxZjkyYjFjNDU0NjJiYjI3NWY1YmQ2OWQ3MmE0NGJkNzViMThlZg%2526code_challenge_method%253DS256%2526scope%253Dopenid%252Baddress%252Bpicture%2526orgid%253D018015%2526txn%253D654631d55b4cfoauth21699099093%2526hashkey%253D73dd72f6d68d830e913ec32f7b38dd605ff885a176402feea175224872a6c509%2526requst_pdf%253DY%2526app_name%253DbXlzY2hlbWU%25253D%2526signup%253Dsignup" id="applyButton">Apply</a>
+                 
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function searchSchemes() {
+            const searchTerm = document.getElementById("search").value.toLowerCase();
+            const schemes = document.querySelectorAll(".scheme");
+
+            schemes.forEach(scheme => {
+                const schemeName = scheme.querySelector("h3").innerText.toLowerCase();
+                if (schemeName.includes(searchTerm)) {
+                    scheme.style.display = "block";
+                } else {
+                    scheme.style.display = "none";
+                }
+            });
+        }
+
+        document.getElementById("checkEligibility").addEventListener("click", function() {
+            showQuestions();
+        });
+
+        document.getElementById("submitEligibility").addEventListener("click", function() {
+            checkEligibility();
+        });
+
+        function showQuestions() {
+            var questions = document.querySelectorAll(".question");
+
+            questions.forEach(function(question) {
+                question.style.display = "block";
+            });
+
+            // Hide the "Check Eligibility" button
+            document.getElementById("checkEligibility").style.display = "none";
+        }
+
+        function checkEligibility() {
+            var questions = document.querySelectorAll(".question");
+            var yesCount = 0;
+
+            questions.forEach(function(question) {
+                var radioButtons = question.querySelectorAll("input[type='radio']");
+                var selectedValue = Array.from(radioButtons).find(rb => rb.checked);
+
+                if (selectedValue && selectedValue.value === "yes") {
+                    yesCount++;
+                }
+            });
+
+            var eligibilityMessage = document.getElementById("eligibilityMessage");
+            var applyButton = document.getElementById("applyButton");
+
+            if (yesCount === 3) {
+                eligibilityMessage.textContent = "You are eligible!";
+                applyButton.style.display = "block";
+            } else {
+                eligibilityMessage.textContent = "Not eligible.";
+                applyButton.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
